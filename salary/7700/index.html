@@ -1,0 +1,56 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>연봉 7,700만원 실수령액 월 5,246,177원 (2026 4대보험·세금 반영)</title>
+<meta name="description" content="연봉 7,700만원이면 월급 실수령액은 약 5,246,177원입니다. 국민연금·건강보험·소득세 공제 내역을 2026년 기준으로 정리했습니다."><link rel="canonical" href="https://fallleap-bit.github.io/wolgeup-calc/salary/7700/">
+<meta property="og:title" content="연봉 7,700만원 실수령액 월 5,246,177원 (2026 4대보험·세금 반영)"><meta property="og:description" content="연봉 7,700만원이면 월급 실수령액은 약 5,246,177원입니다. 국민연금·건강보험·소득세 공제 내역을 2026년 기준으로 정리했습니다.">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1c2430;--mute:#667085;--line:#e4e7ec;--pri:#2563eb}
+@media(prefers-color-scheme:dark){:root{--bg:#0f141b;--card:#18202b;--ink:#e8edf3;--mute:#9aa7b6;--line:#2a3544;--pri:#6ea0ff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,'Malgun Gothic',sans-serif}
+.w{max-width:760px;margin:0 auto;padding:0 16px}header{border-bottom:1px solid var(--line);background:var(--card)}
+header .w{display:flex;gap:16px;align-items:center;height:54px;flex-wrap:wrap}header a{color:var(--ink);text-decoration:none;font-weight:700}
+header nav a{font-weight:400;color:var(--mute);margin-right:12px;font-size:14px}
+h1{font-size:26px;line-height:1.35;margin:28px 0 8px}h2{font-size:19px;margin:30px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+.big{font-size:34px;font-weight:800;color:var(--pri);margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:9px 6px;border-bottom:1px solid var(--line);text-align:right}
+td:first-child,th:first-child{text-align:left}
+label{display:block;margin:10px 0 4px;font-size:14px;color:var(--mute)}
+input,select{width:100%;padding:11px;font-size:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+button{margin-top:14px;padding:12px 20px;font-size:16px;border:0;border-radius:8px;background:var(--pri);color:#fff;font-weight:700;cursor:pointer}
+.links{display:flex;flex-wrap:wrap;gap:8px}.links a{padding:6px 11px;border:1px solid var(--line);border-radius:20px;text-decoration:none;color:var(--ink);font-size:14px;background:var(--card)}
+footer{margin:40px 0;color:var(--mute);font-size:13px}footer a{color:var(--mute)}
+.ad{margin:18px 0;min-height:90px;text-align:center}.note{color:var(--mute);font-size:13px}
+</style></head><body>
+<header><div class="w"><a href="/wolgeup-calc/">월급계산소</a><nav><a href="/wolgeup-calc/salary/">연봉 실수령액</a><a href="/wolgeup-calc/hourly/">시급·주휴수당</a>
+<a href="/wolgeup-calc/freelancer-3-3/">3.3% 계산</a><a href="/wolgeup-calc/severance/">퇴직금</a></nav></div></header><main class="w"><h1>연봉 7,700만원 실수령액</h1>
+<div class="card"><p>월 실수령액(추정, 비과세 식대 20만원·부양가족 1명)</p><div class="big">5,246,177원</div>
+<p class="note">연 환산 약 62,954,120원 · 월 세전 6,416,667원</p></div>
+<h2>공제 내역</h2><div class="card"><table><tr><th>항목</th><th>월 금액(원)</th></tr>
+<tr><td>월 세전 급여</td><td>6,416,667</td></tr><tr><td>국민연금 (4.75%)</td><td>-295,290</td></tr>
+<tr><td>건강보험 (3.595%)</td><td>-223,480</td></tr><tr><td>장기요양보험</td><td>-29,360</td></tr>
+<tr><td>고용보험 (0.9%)</td><td>-55,950</td></tr><tr><td>근로소득세</td><td>-514,920</td></tr>
+<tr><td>지방소득세</td><td>-51,490</td></tr><tr><th>실수령액</th><th>5,246,177</th></tr></table></div>
+<h2>내 조건으로 다시 계산</h2><div class="card"><label>연봉(세전, 만원)</label><input id="a" type="number" value="7700" inputmode="numeric">
+<label>월 비과세(식대 등, 원)</label><input id="n" type="number" value="200000" inputmode="numeric">
+<label>부양가족 수(본인 포함)</label><select id="fm"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select>
+<button onclick="go()">계산하기</button><div id="r"></div></div>
+<script>
+const R={pension:.0475,health:.03595,ltc:.1314,emp:.009},PMAX=6590000,PMIN=400000;
+const f=n=>Math.round(n).toLocaleString('ko-KR');
+function net(annual,nt,fam){const m=annual/12,b=Math.max(m-nt,0),pb=b?Math.min(Math.max(b,PMIN),PMAX):0;
+const t=x=>Math.floor(x/10)*10;const pen=t(pb*R.pension),he=t(b*R.health),lt=t(b*R.health*R.ltc),em=t(b*R.emp),ins=pen+he+lt+em;
+const g=annual-nt*12;let d;if(g<=5e6)d=g*.7;else if(g<=15e6)d=3.5e6+(g-5e6)*.4;else if(g<=45e6)d=7.5e6+(g-15e6)*.15;else if(g<=1e8)d=12e6+(g-45e6)*.05;else d=14.75e6+(g-1e8)*.02;d=Math.min(d,2e7);
+const tb=Math.max(g-d-1.5e6*fam-ins*12,0);const br=[[14e6,.06,0],[50e6,.15,1.26e6],[88e6,.24,5.76e6],[150e6,.35,15.44e6],[3e8,.38,19.94e6],[5e8,.4,25.94e6],[1e9,.42,35.94e6],[Infinity,.45,65.94e6]];
+let tx=0;for(const[a,r,dd]of br){if(tb<=a){tx=tb*r-dd;break}}
+const cr=tx<=1.3e6?tx*.55:715e3+(tx-1.3e6)*.3;let cap;if(g<=33e6)cap=74e4;else if(g<=70e6)cap=Math.max(74e4-(g-33e6)*.008,66e4);else cap=Math.max(66e4-(g-70e6)*.5,5e5);
+tx=Math.max(tx-Math.min(cr,cap)-13e4,0);const inc=t(tx/12),loc=t(inc*.1);
+return{m,pen,he,lt,em,inc,loc,ded:ins+inc+loc,net:m-ins-inc-loc}}
+
+function go(){const x=net(+a.value*1e4,+n.value,+fm.value);
+r.innerHTML='<p>월 실수령액(추정)</p><div class="big">'+f(x.net)+'원</div><table><tr><td>월 세전</td><td>'+f(x.m)+'</td></tr><tr><td>국민연금</td><td>-'+f(x.pen)+'</td></tr><tr><td>건강보험</td><td>-'+f(x.he)+'</td></tr><tr><td>장기요양</td><td>-'+f(x.lt)+'</td></tr><tr><td>고용보험</td><td>-'+f(x.em)+'</td></tr><tr><td>소득세</td><td>-'+f(x.inc)+'</td></tr><tr><td>지방소득세</td><td>-'+f(x.loc)+'</td></tr></table>'}
+go();</script>
+<h2>비슷한 연봉</h2><div class="links"><a href="/wolgeup-calc/salary/7200/">7,200만원</a><a href="/wolgeup-calc/salary/7300/">7,300만원</a><a href="/wolgeup-calc/salary/7400/">7,400만원</a><a href="/wolgeup-calc/salary/7500/">7,500만원</a><a href="/wolgeup-calc/salary/7600/">7,600만원</a><a href="/wolgeup-calc/salary/7800/">7,800만원</a><a href="/wolgeup-calc/salary/7900/">7,900만원</a><a href="/wolgeup-calc/salary/8000/">8,000만원</a><a href="/wolgeup-calc/salary/8100/">8,100만원</a><a href="/wolgeup-calc/salary/8200/">8,200만원</a></div>
+<h2>자주 묻는 질문</h2><p><b>연봉 7,700만원이면 월급은 얼마인가요?</b><br>세전 월 6,416,667원이며, 4대보험과 소득세를 뗀 실수령액은 약 5,246,177원입니다.</p>
+<p><b>왜 실제 월급과 다를 수 있나요?</b><br>부양가족·20세 이하 자녀·비과세 항목·회사별 급여 구성에 따라 소득세가 달라지기 때문입니다.</p></main><footer><div class="w"><p>계산 결과는 간이세액 기준 <b>추정치</b>이며 실제 급여명세서와 다를 수 있습니다.
+(부양가족·자녀 세액공제·비과세 항목에 따라 차이) 최종 확인은 회사 급여담당자 또는 국세청 홈택스를 이용하세요.</p>
+<p><a href="/wolgeup-calc/about.html">소개</a> · <a href="/wolgeup-calc/privacy.html">개인정보처리방침</a> · 기준 2026년 · 갱신 2026-10-06</p></div></footer></body></html>

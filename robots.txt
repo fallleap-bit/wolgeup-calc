@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fallleap-bit.github.io/wolgeup-calc/sitemap.xml
