@@ -1,0 +1,61 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>연봉 5,000만원 연말정산 환급액 약 806,755원 (카드·연금저축 예시)</title>
+<meta name="description" content="연봉 5,000만원이 신용카드 1,250만원·체크카드 500만원·연금저축 300만원을 쓰면 연말정산 예상 환급액은 약 806,755원입니다."><link rel="canonical" href="https://fallleap-bit.github.io/wolgeup-calc/year-end/5000/">
+<meta property="og:title" content="연봉 5,000만원 연말정산 환급액 약 806,755원 (카드·연금저축 예시)"><meta property="og:description" content="연봉 5,000만원이 신용카드 1,250만원·체크카드 500만원·연금저축 300만원을 쓰면 연말정산 예상 환급액은 약 806,755원입니다."><meta name="google-site-verification" content="ohkVY3fiJDbhVEKUszJHTlaanxT71wnqOiBbmUXfhH8">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1c2430;--mute:#667085;--line:#e4e7ec;--pri:#2563eb}
+@media(prefers-color-scheme:dark){:root{--bg:#0f141b;--card:#18202b;--ink:#e8edf3;--mute:#9aa7b6;--line:#2a3544;--pri:#6ea0ff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,'Malgun Gothic',sans-serif}
+.w{max-width:760px;margin:0 auto;padding:0 16px}header{border-bottom:1px solid var(--line);background:var(--card)}
+header .w{display:flex;gap:16px;align-items:center;height:54px;flex-wrap:wrap}header a{color:var(--ink);text-decoration:none;font-weight:700}
+header nav a{font-weight:400;color:var(--mute);margin-right:12px;font-size:14px}
+h1{font-size:26px;line-height:1.35;margin:28px 0 8px}h2{font-size:19px;margin:30px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+.big{font-size:34px;font-weight:800;color:var(--pri);margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:9px 6px;border-bottom:1px solid var(--line);text-align:right}
+td:first-child,th:first-child{text-align:left}
+label{display:block;margin:10px 0 4px;font-size:14px;color:var(--mute)}
+input,select{width:100%;padding:11px;font-size:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+button{margin-top:14px;padding:12px 20px;font-size:16px;border:0;border-radius:8px;background:var(--pri);color:#fff;font-weight:700;cursor:pointer}
+.links{display:flex;flex-wrap:wrap;gap:8px}.links a{padding:6px 11px;border:1px solid var(--line);border-radius:20px;text-decoration:none;color:var(--ink);font-size:14px;background:var(--card)}
+footer{margin:40px 0;color:var(--mute);font-size:13px}footer a{color:var(--mute)}
+.card a,main p a{color:var(--pri);font-weight:600}.ad{margin:18px 0;min-height:90px;text-align:center}.note{color:var(--mute);font-size:13px}
+</style><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4376406089856317" crossorigin="anonymous"></script></head><body>
+<header><div class="w"><a href="/wolgeup-calc/">월급계산소</a><nav><a href="/wolgeup-calc/salary/">연봉 실수령액</a><a href="/wolgeup-calc/hourly/">시급·주휴수당</a>
+<a href="/wolgeup-calc/freelancer-3-3/">3.3% 계산</a><a href="/wolgeup-calc/monthly/">월급별</a><a href="/wolgeup-calc/unemployment/">실업급여</a><a href="/wolgeup-calc/year-end/">연말정산</a><a href="/wolgeup-calc/severance/">퇴직금</a></nav></div></header><main class="w"><h1>연봉 5,000만원 연말정산 환급액</h1><div class="card"><p>예시 조건: 신용카드 1,250만원, 체크카드·현금영수증 500만원, 연금저축 300만원, 부양가족 본인만</p>
+<div class="big">806,755원</div><p class="note">카드 소득공제 1,590,000원 · 연금저축 세액공제 495,000원 (양수면 환급, 음수면 추가 납부)</p></div>
+<h2>내 조건으로 계산</h2><div class="card"><label>연봉(세전, 만원)</label><input id="ya" type="number" value="5000" inputmode="numeric"><label>신용카드 연 사용액(만원)</label><input id="ycr" type="number" value="1250" inputmode="numeric">
+<label>체크카드·현금영수증·대중교통 사용액(만원)</label><input id="yck" type="number" value="500" inputmode="numeric"><label>연금저축 납입액(만원, 연 600만원까지 인정)</label><input id="yps" type="number" value="300" inputmode="numeric">
+<label>IRP 납입액(만원, 연금저축과 합쳐 900만원까지)</label><input id="yirp" type="number" value="0" inputmode="numeric"><label>본인·65세 이상 의료비(만원)</label><input id="ymed" type="number" value="0" inputmode="numeric">
+<label>월세 연 납입액(만원, 무주택 세대주)</label><input id="yrent" type="number" value="0" inputmode="numeric">
+<label>부양가족 수(본인 포함)</label><select id="yfm"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select>
+<button onclick="goy()">환급액 계산</button><div id="yr"></div></div>
+<script>
+const R={pension:.0475,health:.03595,ltc:.1314,emp:.009},PMAX=6590000,PMIN=400000;
+const f=n=>Math.round(n).toLocaleString('ko-KR');
+function net(annual,nt,fam){const m=annual/12,b=Math.max(m-nt,0),pb=b?Math.min(Math.max(b,PMIN),PMAX):0;
+const t=x=>Math.floor(x/10)*10;const pen=t(pb*R.pension),he=t(b*R.health),lt=t(b*R.health*R.ltc),em=t(b*R.emp),ins=pen+he+lt+em;
+const g=annual-nt*12;let d;if(g<=5e6)d=g*.7;else if(g<=15e6)d=3.5e6+(g-5e6)*.4;else if(g<=45e6)d=7.5e6+(g-15e6)*.15;else if(g<=1e8)d=12e6+(g-45e6)*.05;else d=14.75e6+(g-1e8)*.02;d=Math.min(d,2e7);
+const tb=Math.max(g-d-1.5e6*fam-ins*12,0);const br=[[14e6,.06,0],[50e6,.15,1.26e6],[88e6,.24,5.76e6],[150e6,.35,15.44e6],[3e8,.38,19.94e6],[5e8,.4,25.94e6],[1e9,.42,35.94e6],[Infinity,.45,65.94e6]];
+let tx=0;for(const[a,r,dd]of br){if(tb<=a){tx=tb*r-dd;break}}
+const cr=tx<=1.3e6?tx*.55:715e3+(tx-1.3e6)*.3;let cap;if(g<=33e6)cap=74e4;else if(g<=70e6)cap=Math.max(74e4-(g-33e6)*.008,66e4);else cap=Math.max(66e4-(g-70e6)*.5,5e5);
+tx=Math.max(tx-Math.min(cr,cap)-13e4,0);const inc=t(tx/12),loc=t(inc*.1);
+return{m,pen,he,lt,em,inc,loc,ded:ins+inc+loc,net:m-ins-inc-loc}}
+
+function yt(a,nt,fam,cr,ck,ps,irp,med,rent){const x=net(a,nt,fam);const ins=(x.pen+x.he+x.lt+x.em)*12,g=a-nt*12;let d;
+if(g<=5e6)d=g*.7;else if(g<=15e6)d=3.5e6+(g-5e6)*.4;else if(g<=45e6)d=7.5e6+(g-15e6)*.15;else if(g<=1e8)d=12e6+(g-45e6)*.05;else d=14.75e6+(g-1e8)*.02;d=Math.min(d,2e7);
+const th=g*.25,uc=Math.min(cr,th),uk=Math.min(ck,th-uc);let card=Math.max(cr-uc,0)*.15+Math.max(ck-uk,0)*.3;card=Math.min(card,g<=7e7?3e6:g<=12e7?2.5e6:2e6);
+const tb=Math.max(g-d-1.5e6*fam-ins-card,0);const br=[[14e6,.06,0],[50e6,.15,1.26e6],[88e6,.24,5.76e6],[150e6,.35,15.44e6],[3e8,.38,19.94e6],[5e8,.4,25.94e6],[1e9,.42,35.94e6],[Infinity,.45,65.94e6]];
+let tx=0;for(const[t,r,dd]of br){if(tb<=t){tx=tb*r-dd;break}}
+let c=tx<=1.3e6?tx*.55:715e3+(tx-1.3e6)*.3,cap;if(g<=33e6)cap=74e4;else if(g<=70e6)cap=Math.max(74e4-(g-33e6)*.008,66e4);else cap=Math.max(66e4-(g-70e6)*.5,5e5);c=Math.min(c,cap);
+const pen=Math.min(Math.min(ps,6e6)+irp,9e6)*(g<=55e6?.165:.132),medc=Math.max(med-g*.03,0)*.15,sp=Math.max(medc,13e4),rc=Math.min(rent,1e7)*(g<=55e6?.17:g<=8e7?.15:0);
+const fin=Math.max(tx-c-pen-sp-rc,0),paid=x.inc*12;return{refund:(paid-fin)*1.1,card:card,pen:pen,medc:medc,rc:rc}}
+
+function goy(){const m=x=>+document.getElementById(x).value*1e4;const r=yt(m('ya'),2e5,+document.getElementById('yfm').value,m('ycr'),m('yck'),m('yps'),m('yirp'),m('ymed'),m('yrent'));
+const v=Math.round(r.refund);document.getElementById('yr').innerHTML='<p>예상 '+(v>=0?'환급액':'추가 납부액')+'</p><div class="big">'+f(Math.abs(v))+'원</div><table><tr><td>카드 소득공제 (과세표준 감소분)</td><td>'+f(r.card)+'</td></tr><tr><td>연금계좌 세액공제</td><td>'+f(r.pen)+'</td></tr><tr><td>의료비 세액공제</td><td>'+f(r.medc)+'</td></tr><tr><td>월세 세액공제</td><td>'+f(r.rc)+'</td></tr></table>'}
+goy();</script><h2>계산 기준</h2><p>월급에서 미리 뗀 소득세(기납부세액)와 연말정산으로 확정되는 세금(결정세액)의 차이를 환급액으로 계산합니다.
+카드 소득공제는 총급여 25%를 넘는 사용분에 대해 신용카드 15%, 체크카드·현금영수증·대중교통 30%를 공제하고 한도(총급여 7천만원 이하 300만원)를 적용합니다.
+연금저축·IRP는 총급여 5,500만원 이하 16.5%, 초과 13.2% 세액공제(합산 900만원 한도), 의료비는 총급여 3%를 넘는 금액의 15%, 월세는 총급여 8천만원 이하 무주택 세대주가 대상입니다.
+기부금·교육비·보험료·자녀 공제는 반영하지 않은 간이 추정치이므로 실제 홈택스 모의계산과 다를 수 있습니다.</p><h2>비슷한 연봉</h2><div class="links"><a href="/wolgeup-calc/year-end/3500/">3,500만원</a><a href="/wolgeup-calc/year-end/4000/">4,000만원</a><a href="/wolgeup-calc/year-end/4500/">4,500만원</a><a href="/wolgeup-calc/year-end/5500/">5,500만원</a><a href="/wolgeup-calc/year-end/6000/">6,000만원</a><a href="/wolgeup-calc/year-end/6500/">6,500만원</a></div><div class="card"><b>함께 보면 좋은 정보</b><ul><li><a href="https://link.coupang.com/a/hDcql3kEGi" target="_blank" rel="sponsored noopener">월급 관리용 가계부 보러 가기 (쿠팡)</a></li><li><a href="https://link.coupang.com/a/hDcsDKugwu" target="_blank" rel="sponsored noopener">사회초년생 재테크 책 보러 가기 (쿠팡)</a></li></ul><p class="note">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p></div></main><footer><div class="w"><p>계산 결과는 간이세액 기준 <b>추정치</b>이며 실제 급여명세서와 다를 수 있습니다.
+(부양가족·자녀 세액공제·비과세 항목에 따라 차이) 최종 확인은 회사 급여담당자 또는 국세청 홈택스를 이용하세요.</p>
+<p><a href="/wolgeup-calc/about.html">소개</a> · <a href="/wolgeup-calc/privacy.html">개인정보처리방침</a> · 기준 2026년 · 갱신 2026-10-06</p></div></footer></body></html>
