@@ -8,8 +8,10 @@
 | 구분 | 인계 문서(초안) | **이번 기준** |
 |---|---|---|
 | 상품 5개 | 선명한 컬러 | **실사 사진처럼** (재질·광택·질감이 사진 수준) |
-| 나머지 전부 (인물·배경·소품) | 흑백/저채도 | **만화 일러스트, 단 외곽선(테두리) 없는 면 위주 그림체** |
-| 구분 방식 | 색 대비 | **실사 vs 일러스트의 질감 대비** (색은 차분하게 유지해 보조 대비로 활용) |
+| 나머지 전부 (인물·배경·소품) | 흑백/저채도 | **흑백(회색조) 만화 일러스트, 외곽선(테두리) 없는 면 위주 그림체** |
+| 구분 방식 | 색 대비 | **컬러 실사 상품 vs 흑백 만화 배경** — 색과 질감 두 가지로 동시에 구분 |
+
+> 스타일 견본: 사용자가 보여준 '호숫가 낚시 캠핑' 이미지 (흑백 만화 인물·풍경 + 컬러 실사 아이스박스·의자·낚싯대·랜턴·태클박스). 단, 견본처럼 **핫스팟 동그라미를 그림에 그려 넣지는 않는다** (웹 UI 레이어로 얹음).
 
 "테두리 없는 만화" = 검은 윤곽선 없이 색면·명암 덩어리로만 형태를 만드는 플랫/페인터리 일러스트 (그림책·모바일 게임 배경 같은 톤). 웹툰처럼 선을 따는 그림체가 아니다.
 
@@ -59,16 +61,16 @@
 
 > 초저녁 한국의 현실적인 가족 캠핑장을 찍은 사진, 가로 16:9. 오른쪽에서 들어오는 따뜻한 노을빛. 첨부한 배치 이미지는 구도와 물건 위치만 참고하고 그림체는 따르지 않는다. 중경 왼쪽에 문이 열린 올리브색 돔 텐트가 설치되어 있고, 그 오른쪽에서 아빠가 무릎을 꿇고 땀을 흘리며 마지막 팩을 망치로 박는다. 전경 가운데 오른쪽 돗자리에서 엄마와 아이가 과자를 먹고, 엄마는 아빠를 가리키며 웃는다. 오른쪽 전경에는 **아무도 앉지 않은** 남색 접이식 캠핑 의자, 그 옆 랜턴 걸이에 켜진 주황색 LED 랜턴. 왼쪽 전경 자갈 바닥에 흰 뚜껑의 청록색 하드 아이스박스(닫힘). 가운데 전경에 장작만 올린, 불을 아직 붙이지 않은 구릿빛 화로대와 옆의 작은 장작 더미. 서서 보는 눈높이, 살짝 내려다보는 35mm 시점. 원근·그림자·크기 일관. 사람은 상품 5개(텐트·의자·아이스박스·랜턴·화로대) 어느 것도 만지거나 가리지 않는다. 상단 18%는 하늘 여백. 글자·로고·상표·가격표·워터마크 없음.
 
-**네거티브:** text, letters, logo, brand, watermark, price tag, UI button, extra chairs, second cooler, people sitting on the chair, hands touching products, distorted hands, extra fingers, floating objects, wrong shadows, oversized lantern, objects intersecting, cluttered background, advertisement poster look.
+**네거티브:** hotspot circles, glowing dots, UI markers, partially colored background objects, text, letters, logo, brand, watermark, price tag, UI button, extra chairs, second cooler, people sitting on the chair, hands touching products, distorted hands, extra fingers, floating objects, wrong shadows, oversized lantern, objects intersecting, cluttered background, advertisement poster look.
 
 ### ② 만화화 편집 프롬프트 (① 결과를 입력으로)
 
 가능하면 **마스크 기반 편집(인페인팅)**을 쓴다. 상품 5개를 보호 영역으로 칠하고 나머지만 다시 그리게 한다. 마스크 기능이 없으면 아래 문장으로 지시만 한다. 어느 쪽이든 ③에서 상품을 되돌린다.
 
 > Edit this exact image. Keep the composition, camera, every object's position, size and silhouette, and the lighting direction exactly the same. **Do not change these five objects at all; keep them photorealistic: the olive dome tent, the navy folding chair, the teal cooler box, the orange hanging lantern, the copper fire pit.**
-> Redraw everything else (sky, mountains, trees, ground, picnic mat, firewood, lantern pole, and all three people) as a **soft flat painted illustration with no outlines**: no black line art, no contour strokes, shapes defined only by flat color areas and soft shading, like a modern picture-book or cozy game background. Slightly muted, warm dusk palette so the photorealistic objects stand out. Friendly, simple, expressive faces with no line art. No text.
+> Redraw everything else (sky, mountains, trees, ground, picnic mat, firewood, lantern pole, and all three people) as a **soft flat painted illustration with no outlines**: no black line art, no contour strokes, shapes defined only by flat color areas and soft shading, like a modern picture-book or cozy game background. Render all of it in **black-and-white grayscale** (no color at all) so only the five photorealistic color objects stand out. Friendly, simple, expressive faces with no line art. No text.
 
-한국어 요지: *같은 이미지를 편집. 구도·위치·크기·윤곽·빛 방향은 그대로. 텐트·의자·아이스박스·랜턴·화로대 5개는 절대 바꾸지 말고 실사로 유지. 나머지(하늘·산·나무·바닥·돗자리·장작·폴·인물 3명)는 **외곽선 없는** 면 위주의 부드러운 일러스트로. 검은 선 따기 금지. 색은 살짝 차분하게.*
+한국어 요지: *같은 이미지를 편집. 구도·위치·크기·윤곽·빛 방향은 그대로. 텐트·의자·아이스박스·랜턴·화로대 5개는 절대 바꾸지 말고 실사로 유지. 나머지(하늘·산·나무·바닥·돗자리·장작·폴·인물 3명)는 **외곽선 없는** 면 위주의 부드러운 일러스트로. 검은 선 따기 금지. 전부 **흑백(회색조)**으로, 컬러는 상품 5개에만.* 그림 안에 동그라미·점·화살표 같은 클릭 표시를 그리지 않는다.
 
 ### ③ 합성 (`tools/composite.py`)
 
