@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <!--
+    아이고마켓 · 가족 캠핑 초저녁 — 구도 가이드 (실제 시안 아님)
+    - 테두리(외곽선) 없는 면 위주 일러스트 톤 예시. 글자 없음 → 이미지 생성 AI에 '구도 참고 이미지'로 첨부 가능.
+    - 상품 5개(P1~P5)만 채도 높은 고유색, 나머지는 차분한 저채도 면.
+    - P1 텐트 / P2 접이식 의자 / P3 아이스박스 / P4 랜턴 / P5 화로대
+  -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#46506e"/>
+      <stop offset="0.55" stop-color="#8d7f8f"/>
+      <stop offset="1" stop-color="#e3b48f"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7d7c66"/>
+      <stop offset="1" stop-color="#a29b80"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe2b0" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ffe2b0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lanternGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffcf7a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffcf7a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tentBody" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5f6f2e"/>
+      <stop offset="0.6" stop-color="#7c8c3d"/>
+      <stop offset="1" stop-color="#596829"/>
+    </linearGradient>
+    <filter id="real" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="3" seed="7" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0.6 0 0 0 0" result="ng"/>
+      <feComposite in="ng" in2="SourceAlpha" operator="in" result="nm"/>
+      <feBlend in="nm" in2="SourceGraphic" mode="overlay" result="tex"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="9" result="blur"/>
+      <feSpecularLighting in="blur" surfaceScale="6" specularConstant="0.9" specularExponent="22" lighting-color="#ffe2bd" result="spec">
+        <feDistantLight azimuth="-20" elevation="35"/>
+      </feSpecularLighting>
+      <feComposite in="spec" in2="SourceAlpha" operator="in" result="specIn"/>
+      <feDiffuseLighting in="blur" surfaceScale="6" diffuseConstant="1" lighting-color="#ffffff" result="diff">
+        <feDistantLight azimuth="-20" elevation="50"/>
+      </feDiffuseLighting>
+      <feComposite in="diff" in2="SourceAlpha" operator="in" result="diffIn"/>
+      <feBlend in="diffIn" in2="tex" mode="multiply" result="lit"/>
+      <feComposite in="lit" in2="specIn" operator="arithmetic" k1="0" k2="1" k3="0.45" k4="0"/>
+    </filter>
+    <filter id="paint" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="2" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="6" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- 하늘 + 해 (상단 18%는 UI 제목 여백) -->
+  <rect width="1600" height="560" fill="url(#sky)"/>
+  <circle cx="1230" cy="440" r="170" fill="url(#sun)"/>
+  <circle cx="1230" cy="452" r="34" fill="#ffd9a0" opacity="0.85"/>
+
+  <!-- 원경 산 -->
+  <path d="M0 470 L140 400 L260 440 L420 360 L560 430 L700 390 L860 450 L1020 380 L1180 440 L1340 395 L1480 430 L1600 400 L1600 560 L0 560 Z" fill="#6c6a86"/>
+  <path d="M0 500 L180 455 L360 490 L520 450 L720 495 L900 465 L1100 500 L1300 470 L1600 490 L1600 560 L0 560 Z" fill="#5c6a62"/>
+
+  <!-- 나무 실루엣 (좌/우 가장자리) -->
+  <g fill="#3e5148">
+    <path d="M30 520 L85 300 L140 520 Z"/>
+    <path d="M100 530 L170 250 L240 530 Z"/>
+    <path d="M190 525 L240 340 L290 525 Z"/>
+    <path d="M1460 525 L1515 290 L1570 525 Z"/>
+    <path d="M1520 535 L1575 330 L1630 535 Z"/>
+  </g>
+  <g fill="#4a5c50">
+    <rect x="80" y="515" width="10" height="30"/>
+    <rect x="165" y="525" width="12" height="30"/>
+    <rect x="1510" y="520" width="10" height="30"/>
+  </g>
+
+  <!-- 먼 이웃 캠프 (배경, 상품 아님) -->
+  <path d="M1080 520 Q1100 490 1125 488 Q1150 490 1168 520 Z" fill="#8a8578"/>
+  <circle cx="1185" cy="508" r="3" fill="#e8c890"/>
+
+  <!-- 바닥 -->
+  <rect y="520" width="1600" height="380" fill="url(#ground)"/>
+  <ellipse cx="760" cy="720" rx="760" ry="170" fill="#ada68b" opacity="0.6"/>
+  <!-- 바닥 자갈 질감 (면만) -->
+  <g fill="#958f75" opacity="0.7">
+    <ellipse cx="120" cy="610" rx="18" ry="5"/><ellipse cx="460" cy="640" rx="14" ry="4"/>
+    <ellipse cx="900" cy="620" rx="16" ry="4"/><ellipse cx="1430" cy="700" rx="20" ry="5"/>
+    <ellipse cx="560" cy="860" rx="22" ry="6"/><ellipse cx="1000" cy="870" rx="18" ry="5"/>
+    <ellipse cx="1350" cy="850" rx="16" ry="4"/><ellipse cx="60" cy="860" rx="20" ry="5"/>
+  </g>
+
+  <g filter="url(#real)">
+  <!-- P1 텐트 (중경 좌측, 올리브) -->
+  <ellipse cx="530" cy="598" rx="270" ry="22" fill="#5a5846" opacity="0.45"/>
+  <path d="M290 592 Q320 330 530 300 Q740 330 770 592 Z" fill="url(#tentBody)"/>
+  <path d="M530 300 Q600 330 640 592 L600 592 Q575 360 530 300 Z" fill="#8d9c4a" opacity="0.7"/>
+  <path d="M450 592 Q465 455 530 442 Q595 455 610 592 Z" fill="#323a1a"/>
+  <path d="M530 442 Q595 455 610 592 L590 592 Q580 470 530 442 Z" fill="#46502a"/>
+  <!-- 텐트 스트링 + 팩 (텐트 부속) -->
+  <path d="M300 520 L240 610" stroke="#c9c19a" stroke-width="2"/>
+  <path d="M760 520 L858 604" stroke="#c9c19a" stroke-width="2"/>
+  <rect x="236" y="604" width="6" height="12" fill="#9a9a9a"/>
+
+  </g>
+  <!-- 아빠 (배경 인물): 텐트 오른쪽 모서리에서 마지막 팩 박는 중, 땀 -->
+  <g>
+    <ellipse cx="830" cy="608" rx="60" ry="9" fill="#5a5846" opacity="0.4"/>
+    <!-- 다리(무릎 꿇음) -->
+    <path d="M790 600 L790 570 Q795 556 815 556 L840 556 L840 572 L812 572 L812 600 Z" fill="#555b66"/>
+    <rect x="786" y="596" width="30" height="10" rx="4" fill="#3f4249"/>
+    <!-- 몸통 (앞으로 숙임) -->
+    <path d="M800 560 Q795 510 820 488 Q845 478 858 500 L860 560 Z" fill="#a7a99f"/>
+    <!-- 팔 + 망치 -->
+    <path d="M850 505 Q880 520 878 552 L866 556 Q866 530 845 520 Z" fill="#a7a99f"/>
+    <circle cx="872" cy="558" r="8" fill="#d9ad88"/>
+    <rect x="868" y="540" width="6" height="34" fill="#7a5c3e" transform="rotate(-25 871 557)"/>
+    <rect x="858" y="532" width="26" height="12" rx="2" fill="#6b6b6b" transform="rotate(-25 871 538)"/>
+    <rect x="855" y="592" width="6" height="16" fill="#9a9a9a"/>
+    <!-- 머리 + 모자 -->
+    <circle cx="842" cy="470" r="22" fill="#d9ad88"/>
+    <path d="M818 466 Q820 440 845 440 Q868 442 866 462 Z" fill="#6f7a86"/>
+    <!-- 땀방울 -->
+    <path d="M872 452 Q878 462 872 468 Q866 462 872 452 Z" fill="#cfe3f0"/>
+    <path d="M880 474 Q884 481 880 485 Q876 481 880 474 Z" fill="#cfe3f0"/>
+  </g>
+
+  <!-- 돗자리 + 엄마 + 아이 (배경 인물) — 이미 쉬는 중 -->
+  <path d="M790 668 L1050 660 L1072 772 L800 784 Z" fill="#c4b79d"/>
+  <path d="M800 700 L1058 692 L1062 712 L803 720 Z" fill="#b5a88e"/>
+  <!-- 엄마: 앉아서 아빠 쪽 가리키며 웃음 -->
+  <g>
+    <path d="M860 760 Q850 730 870 712 L920 712 Q940 735 934 760 Z" fill="#8e8a7e"/>
+    <path d="M868 716 Q862 668 892 650 Q922 664 920 716 Z" fill="#b9a48f"/>
+    <path d="M870 668 Q840 640 828 612 L840 606 Q856 636 884 656 Z" fill="#b9a48f"/>
+    <circle cx="830" cy="606" r="7" fill="#e2b896"/>
+    <circle cx="895" cy="628" r="21" fill="#e2b896"/>
+    <path d="M873 628 Q870 600 896 600 Q922 600 918 630 Q912 612 896 612 Q882 612 873 628 Z" fill="#4f4a46"/>
+    <path d="M887 636 Q895 644 903 636 Z" fill="#9b5b52"/>
+  </g>
+  <!-- 아이: 과자 먹는 중 -->
+  <g>
+    <path d="M975 762 Q968 740 982 728 L1018 728 Q1030 745 1024 762 Z" fill="#7f8b8e"/>
+    <path d="M982 732 Q978 696 1000 684 Q1022 696 1018 732 Z" fill="#c9b78a"/>
+    <circle cx="1000" cy="666" r="17" fill="#e2b896"/>
+    <path d="M983 664 Q984 645 1000 645 Q1017 645 1017 664 Q1008 654 1000 654 Q990 654 983 664 Z" fill="#3f3a36"/>
+    <rect x="1010" y="696" width="18" height="24" rx="3" fill="#a9a08f"/>
+  </g>
+
+  <!-- 장작 더미 (배경, 상품 아님) -->
+  <g fill="#7a6650">
+    <rect x="452" y="752" width="90" height="14" rx="7"/>
+    <rect x="458" y="738" width="80" height="14" rx="7"/>
+    <rect x="470" y="724" width="60" height="14" rx="7"/>
+  </g>
+
+  <g filter="url(#real)">
+  <!-- P5 화로대 (전경 중앙, 아직 불 안 붙임, 코퍼/브론즈) -->
+  <ellipse cx="660" cy="788" rx="110" ry="14" fill="#5a5846" opacity="0.45"/>
+  <path d="M590 770 L612 712 L622 712 L604 776 Z" fill="#3b3b3b"/>
+  <path d="M730 770 L708 712 L698 712 L716 776 Z" fill="#3b3b3b"/>
+  <path d="M650 786 L655 716 L665 716 L670 786 Z" fill="#2f2f2f"/>
+  <path d="M572 672 L748 672 L712 726 L608 726 Z" fill="#b5652f"/>
+  <path d="M572 672 L748 672 L740 684 L580 684 Z" fill="#d07a3a"/>
+  <g fill="#6a5a46"><rect x="620" y="660" width="70" height="12" rx="6" transform="rotate(-8 655 666)"/><rect x="630" y="656" width="60" height="12" rx="6" transform="rotate(10 660 662)"/></g>
+
+  </g>
+  <g filter="url(#real)">
+  <!-- P3 아이스박스 (전경 좌측, 청록) -->
+  <ellipse cx="275" cy="842" rx="150" ry="16" fill="#5a5846" opacity="0.5"/>
+  <path d="M150 702 L400 702 L392 838 L158 838 Z" fill="#1f8f8a"/>
+  <path d="M140 676 L410 676 L404 712 L146 712 Z" fill="#f0efe8"/>
+  <path d="M140 676 L410 676 L408 688 L142 688 Z" fill="#ffffff"/>
+  <rect x="236" y="660" width="78" height="16" rx="6" fill="#d8d6cf"/>
+  <rect x="158" y="806" width="234" height="10" fill="#18736f"/>
+  <rect x="370" y="740" width="14" height="40" rx="4" fill="#e9e7df"/>
+
+  </g>
+  <!-- 랜턴 폴 (배경) + P4 랜턴 (우측, 주황) -->
+  <rect x="1408" y="320" width="7" height="370" fill="#4b4b4b"/>
+  <rect x="1398" y="686" width="27" height="8" rx="3" fill="#3f3f3f"/>
+  <rect x="1360" y="320" width="55" height="6" fill="#4b4b4b"/>
+  <circle cx="1372" cy="400" r="120" fill="url(#lanternGlow)"/>
+  <g filter="url(#real)"><rect x="1370" y="326" width="3" height="20" fill="#5b5b5b"/>
+  <path d="M1350 346 L1394 346 L1398 360 L1346 360 Z" fill="#e37a24"/>
+  <rect x="1352" y="360" width="40" height="52" rx="6" fill="#ffe0a3"/>
+  <rect x="1352" y="360" width="8" height="52" fill="#e9862f"/>
+  <rect x="1384" y="360" width="8" height="52" fill="#e9862f"/>
+  <path d="M1346 412 L1398 412 L1394 428 L1350 428 Z" fill="#e37a24"/>
+
+  </g>
+  <g filter="url(#real)">
+  <!-- P2 접이식 캠핑 의자 (전경 우측, 비어 있는 '아빠 자리', 남색) -->
+  <ellipse cx="1205" cy="792" rx="125" ry="14" fill="#5a5846" opacity="0.5"/>
+  <g fill="#2e2e33">
+    <rect x="1118" y="640" width="8" height="150" rx="3" transform="rotate(14 1122 715)"/>
+    <rect x="1284" y="640" width="8" height="150" rx="3" transform="rotate(-14 1288 715)"/>
+    <rect x="1146" y="650" width="8" height="140" rx="3" transform="rotate(-16 1150 720)"/>
+    <rect x="1256" y="650" width="8" height="140" rx="3" transform="rotate(16 1260 720)"/>
+    <rect x="1132" y="514" width="7" height="140" rx="3" transform="rotate(-4 1135 584)"/>
+    <rect x="1271" y="514" width="7" height="140" rx="3" transform="rotate(4 1274 584)"/>
+  </g>
+  <path d="M1138 512 Q1205 500 1272 512 L1282 640 Q1205 652 1128 640 Z" fill="#2b3f70"/>
+  <path d="M1138 512 Q1205 500 1272 512 L1274 530 Q1205 520 1136 530 Z" fill="#3a5290"/>
+  <path d="M1112 640 Q1205 628 1298 640 L1290 668 Q1205 712 1120 668 Z" fill="#22335c"/>
+  <path d="M1096 628 L1140 626 L1140 638 L1098 640 Z" fill="#1d2b4e"/>
+  <path d="M1270 626 L1314 628 L1312 640 L1270 638 Z" fill="#1d2b4e"/>
+  <rect x="1290" y="610" width="22" height="20" rx="4" fill="#22335c"/>
+  </g>
+</svg>
