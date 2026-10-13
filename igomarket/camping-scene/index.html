@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>캠핑 장면 시안</title>
+<style>
+  :root {
+    --bg: #f4f2ed;
+    --fg: #23211d;
+    --muted: #6b665c;
+    --card: #ffffff;
+    --line: #dcd7cc;
+    --accent: #e8792b;
+    --dot: #ffffff;
+    --ring: rgba(255, 255, 255, 0.85);
+    --shade: rgba(20, 18, 14, 0.55);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17161a; --fg: #ece9e2; --muted: #a29d92; --card: #222127; --line: #34323a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17161a; --fg: #ece9e2; --muted: #a29d92; --card: #222127; --line: #34323a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  }
+  main { max-width: 1200px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  /* ── 장면 ───────────────────────────── */
+  .stage { position: relative; margin: 0; border-radius: 14px; overflow: hidden; background: #2b2a30; user-select: none; }
+  .stage img { display: block; width: 100%; height: auto; }
+  .stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* UI 레이어: 제목·안내 (이미지에 굽지 않음) */
+  .scene-title { position: absolute; left: 3%; top: 4%; right: 40%; pointer-events: none; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.45); }
+  .scene-title h1 { margin: 0; font-size: clamp(16px, 2.6vw, 30px); font-weight: 800; letter-spacing: -0.02em; }
+  .scene-title p { margin: .2em 0 0; font-size: clamp(11px, 1.3vw, 15px); opacity: .9; }
+
+  /* 클릭 영역: 상품 모양 그대로 */
+  .area { fill: transparent; cursor: pointer; pointer-events: all; }
+  .show-areas .area, .editing .area { fill: rgba(232, 121, 43, 0.22); stroke: #ffb37a; stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .area.active { fill: rgba(255, 255, 255, 0.12); }
+
+  /* 핫스팟: 작은 점 + 은은한 맥동. 터치 영역은 44px 확보 */
+  .spot {
+    position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0;
+    border: 0; background: transparent; cursor: pointer; border-radius: 50%;
+  }
+  .spot::before, .spot::after { content: ""; position: absolute; left: 50%; top: 50%; border-radius: 50%; }
+  .spot::before { width: 12px; height: 12px; margin: -6px 0 0 -6px; background: var(--dot); box-shadow: 0 0 0 2px rgba(0,0,0,.25); }
+  .spot::after { width: 12px; height: 12px; margin: -6px 0 0 -6px; border: 2px solid var(--ring); animation: pulse 2.4s ease-out infinite; }
+  .spot:focus-visible { outline: 3px solid var(--accent); outline-offset: -4px; }
+  @keyframes pulse { 0% { transform: scale(1); opacity: .9; } 70% { transform: scale(2.8); opacity: 0; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .spot::after { animation: none; transform: scale(1.9); opacity: .8; }
+  }
+
+  /* 말풍선 */
+  .tip {
+    position: absolute; z-index: 5; min-width: 150px; max-width: 220px; padding: 10px 12px;
+    background: var(--card); color: var(--fg); border-radius: 10px; box-shadow: 0 6px 24px rgba(0,0,0,.28);
+    font-size: 13px; transform: translate(-50%, calc(-100% - 26px)); pointer-events: none; opacity: 0; transition: opacity .15s;
+  }
+  .tip.show { opacity: 1; pointer-events: auto; }
+  .tip.below { transform: translate(-50%, 26px); }
+  .tip.left { transform: translate(calc(-100% + 24px), calc(-100% - 26px)); }
+  .tip.left.below { transform: translate(calc(-100% + 24px), 26px); }
+  .tip.right { transform: translate(-24px, calc(-100% - 26px)); }
+  .tip.right.below { transform: translate(-24px, 26px); }
+  .tip b { display: block; font-size: 14px; }
+  .tip span { color: var(--muted); }
+  .tip button { margin-top: 8px; width: 100%; padding: 8px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+
+  /* ── 도구 막대 ───────────────────────── */
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0; }
+  .bar button, .bar label.btn, .bar select {
+    font: inherit; font-size: 14px; padding: 7px 12px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--card); color: var(--fg); cursor: pointer;
+  }
+  .bar button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+  .bar input[type=file] { display: none; }
+  .bar .spacer { flex: 1; }
+  .note { color: var(--muted); font-size: 13px; }
+
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-top: 12px; }
+  .panel h2 { margin: 0 0 6px; font-size: 16px; }
+  .panel p { margin: 4px 0; }
+  .panel code { font-size: 13px; }
+
+  table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  .tbl-wrap { overflow-x: auto; }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 99px; font-size: 12px; background: #f6dfc9; color: #7a3d0e; }
+  .badge.ok { background: #d6ecd9; color: #1f5a2a; }
+
+  .editor { display: none; }
+  .editing .editor { display: block; }
+  .editing .stage { cursor: crosshair; }
+  .editing .spot { pointer-events: none; }
+  textarea { width: 100%; min-height: 160px; font: 12px/1.4 ui-monospace, Menlo, monospace; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+
+  @media (max-width: 640px) {
+    .scene-title { right: 8%; }
+    .spot::before { width: 10px; height: 10px; margin: -5px 0 0 -5px; }
+  }
+</style>
+</head>
+<body>
+<main id="app">
+  <figure class="stage" id="stage">
+    <img id="sceneImg" alt="">
+    <svg id="areas" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div class="scene-title"><h1 id="sceneTitle"></h1><p id="sceneHint"></p></div>
+    <div id="spots"></div>
+    <div class="tip" id="tip" role="dialog" aria-live="polite"></div>
+  </figure>
+
+  <div class="bar">
+    <button type="button" id="toggleAreas" aria-pressed="false">클릭 영역 보기</button>
+    <label class="btn" for="filePick">생성 이미지 불러오기</label>
+    <input type="file" id="filePick" accept="image/*">
+    <button type="button" id="toggleEdit" aria-pressed="false">영역 편집</button>
+    <span class="spacer"></span>
+    <span class="note" id="imgNote"></span>
+  </div>
+
+  <section class="panel editor" aria-label="영역 편집">
+    <h2>영역 편집</h2>
+    <p class="note">상품을 고른 뒤 장면을 클릭해 외곽 꼭짓점을 찍습니다. [핫스팟 찍기]를 누르고 클릭하면 점 위치가 바뀝니다. 완성 이미지에서 직접 찍은 좌표만 '검수 완료'로 바꾸세요.</p>
+    <div class="bar">
+      <select id="editTarget"></select>
+      <button type="button" id="editClear">이 상품 영역 지우기</button>
+      <button type="button" id="editUndo">마지막 점 취소</button>
+      <button type="button" id="editHotspot" aria-pressed="false">핫스팟 찍기</button>
+      <button type="button" id="editVerify">검수 완료로 표시</button>
+      <span class="spacer"></span>
+      <button type="button" id="editExport">scene.js 저장</button>
+    </div>
+    <textarea id="editOut" readonly aria-label="scene.js 내용"></textarea>
+  </section>
+
+  <section class="panel" id="result" hidden>
+    <h2 id="resultTitle"></h2>
+    <p id="resultBody"></p>
+  </section>
+
+  <section class="panel">
+    <h2>클릭 핫스팟 설계표</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>#</th><th>상품군</th><th>장면 속 위치</th><th>핫스팟 중심 (x, y %)</th><th>클릭 범위 (가로×세로 %)</th><th>이동 목적지</th><th>좌표</th></tr></thead>
+        <tbody id="spec"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script src="scene.js"></script>
+<script>
+(() => {
+  const S = window.SCENE_DATA;
+  const $ = (id) => document.getElementById(id);
+  const stage = $('stage'), img = $('sceneImg'), svg = $('areas'), spots = $('spots'), tip = $('tip');
+  const NS = 'http://www.w3.org/2000/svg';
+  let openId = null, editing = false, hotspotMode = false;
+
+  $('sceneTitle').textContent = S.title;
+  $('sceneHint').textContent = S.hint;
+  img.alt = '가족 캠핑 장면. 클릭 가능한 상품: ' + S.products.map(p => p.name).join(', ');
+
+  // final.png가 없으면 구도 가이드로 대체
+  img.onerror = () => {
+    if (img.dataset.fallback) return;
+    img.dataset.fallback = '1';
+    img.src = S.fallbackImage;
+    $('imgNote').textContent = '생성 이미지 없음 → 구도 가이드 표시 중 (실제 시안 아님)';
+  };
+  img.src = S.image;
+
+  $('filePick').addEventListener('change', (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    img.dataset.fallback = '1';
+    img.src = URL.createObjectURL(f);
+    $('imgNote').textContent = '불러온 이미지: ' + f.name + ' (좌표는 직접 검수 필요)';
+  });
+
+  const bbox = (poly) => {
+    const xs = poly.map(p => p[0]), ys = poly.map(p => p[1]);
+    return { x: Math.min(...xs), y: Math.min(...ys), w: Math.max(...xs) - Math.min(...xs), h: Math.max(...ys) - Math.min(...ys) };
+  };
+  const r1 = (n) => Math.round(n * 10) / 10;
+
+  function render() {
+    svg.innerHTML = ''; spots.innerHTML = '';
+    for (const p of S.products) {
+      const poly = document.createElementNS(NS, 'polygon');
+      poly.setAttribute('points', p.polygon.map(pt => pt.join(',')).join(' '));
+      poly.setAttribute('class', 'area' + (openId === p.id ? ' active' : ''));
+      poly.addEventListener('click', (e) => { if (!editing) { e.stopPropagation(); openTip(p); } });
+      poly.addEventListener('mouseenter', () => { if (!editing && matchMedia('(hover: hover)').matches) openTip(p, true); });
+      svg.appendChild(poly);
+
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'spot';
+      b.style.left = p.hotspot[0] + '%'; b.style.top = p.hotspot[1] + '%';
+      b.setAttribute('aria-label', `${p.no}. ${p.name} — ${p.blurb}`);
+      b.addEventListener('click', (e) => { e.stopPropagation(); openTip(p); });
+      b.addEventListener('mouseenter', () => { if (matchMedia('(hover: hover)').matches) openTip(p, true); });
+      b.addEventListener('focus', () => openTip(p, true));
+      spots.appendChild(b);
+    }
+    renderSpec();
+    if (editing) renderExport();
+  }
+
+  function openTip(p) {
+    openId = p.id;
+    const [x, y] = p.hotspot;
+    tip.className = 'tip show' + (y < 30 ? ' below' : '') + (x > 80 ? ' left' : x < 20 ? ' right' : '');
+    tip.style.left = x + '%'; tip.style.top = y + '%';
+    tip.innerHTML = '';
+    const b = document.createElement('b'); b.textContent = p.name;
+    const s = document.createElement('span'); s.textContent = p.blurb;
+    const go = document.createElement('button'); go.type = 'button'; go.textContent = p.name + ' 비교 보러 가기';
+    go.addEventListener('click', (e) => { e.stopPropagation(); navigate(p); });
+    tip.append(b, s, go);
+    svg.querySelectorAll('.area').forEach((el, i) => el.classList.toggle('active', S.products[i].id === p.id));
+  }
+  function closeTip() {
+    openId = null; tip.className = 'tip';
+    svg.querySelectorAll('.area').forEach(el => el.classList.remove('active'));
+  }
+  stage.addEventListener('mouseleave', () => { if (matchMedia('(hover: hover)').matches) closeTip(); });
+  tip.addEventListener('click', (e) => e.stopPropagation());
+  stage.addEventListener('click', () => { if (!editing) closeTip(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeTip(); });
+
+  // 실제 목적지 URL이 정해지기 전까지는 임시 식별자만 보여준다.
+  function navigate(p) {
+    $('result').hidden = false;
+    $('resultTitle').textContent = `${p.no}. ${p.name} 상품군 화면으로 이동`;
+    $('resultBody').innerHTML = '';
+    const t = document.createElement('span');
+    t.textContent = '목적지(임시 식별자): ';
+    const c = document.createElement('code'); c.textContent = p.target;
+    const n = document.createElement('p'); n.className = 'note';
+    n.textContent = '실제 URL이 정해지면 scene.js의 target만 바꾸면 됩니다.';
+    $('resultBody').append(t, c, n);
+    $('result').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+  }
+
+  function renderSpec() {
+    const where = { tent: '중경 좌측, 설치 완료 상태', 'camping-chair': '전경 우측, 비어 있는 아빠 자리', cooler: '전경 좌측 바닥', lantern: '우측 랜턴 걸이에 매달림', 'fire-pit': '전경 중앙, 장작 옆' };
+    $('spec').innerHTML = '';
+    for (const p of S.products) {
+      const bb = bbox(p.polygon), ok = p['검수'] === '완료';
+      const tr = document.createElement('tr');
+      const cells = [p.no, p.name, where[p.id] || '', `${p.hotspot[0]}, ${p.hotspot[1]}`, `${r1(bb.w)} × ${r1(bb.h)}`, p.target];
+      for (const v of cells) { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); }
+      const td = document.createElement('td');
+      const bd = document.createElement('span'); bd.className = 'badge' + (ok ? ' ok' : ''); bd.textContent = ok ? '검수 완료' : '검수 필요';
+      td.appendChild(bd); tr.appendChild(td);
+      $('spec').appendChild(tr);
+    }
+  }
+
+  // ── 클릭 영역 보기 / 편집 ──
+  $('toggleAreas').addEventListener('click', (e) => {
+    const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+    e.currentTarget.setAttribute('aria-pressed', on);
+    stage.classList.toggle('show-areas', on);
+  });
+
+  const sel = $('editTarget');
+  S.products.forEach(p => { const o = document.createElement('option'); o.value = p.id; o.textContent = `${p.no}. ${p.name}`; sel.appendChild(o); });
+  const cur = () => S.products.find(p => p.id === sel.value);
+
+  $('toggleEdit').addEventListener('click', (e) => {
+    editing = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+    e.currentTarget.setAttribute('aria-pressed', editing);
+    $('app').classList.toggle('editing', editing);
+    closeTip(); render();
+  });
+  $('editClear').addEventListener('click', () => { cur().polygon = []; cur()['검수'] = '필요'; render(); });
+  $('editUndo').addEventListener('click', () => { cur().polygon.pop(); render(); });
+  $('editHotspot').addEventListener('click', (e) => { hotspotMode = !hotspotMode; e.currentTarget.setAttribute('aria-pressed', hotspotMode); });
+  $('editVerify').addEventListener('click', () => { cur()['검수'] = '완료'; render(); });
+
+  stage.addEventListener('click', (e) => {
+    if (!editing) return;
+    const r = img.getBoundingClientRect();
+    const pt = [r1((e.clientX - r.left) / r.width * 100), r1((e.clientY - r.top) / r.height * 100)];
+    if (hotspotMode) {
+      cur().hotspot = pt; hotspotMode = false; $('editHotspot').setAttribute('aria-pressed', 'false');
+    } else {
+      cur().polygon.push(pt);
+    }
+    cur()['검수'] = '필요';
+    render();
+  });
+
+  function sceneJs() {
+    const head = '// 아이고마켓 · 장면 데이터 (index.html 영역 편집에서 저장)\n// 좌표는 기준 이미지 대비 %. target은 실제 URL이 정해지기 전까지 임시 식별자.\n';
+    return head + 'window.SCENE_DATA = ' + JSON.stringify(S, null, 2) + ';\n';
+  }
+  function renderExport() { $('editOut').value = sceneJs(); }
+  $('editExport').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([sceneJs()], { type: 'text/javascript' }));
+    a.download = 'scene.js'; a.click();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
